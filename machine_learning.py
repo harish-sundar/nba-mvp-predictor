@@ -14,7 +14,7 @@ predictors = ['Age', 'G', 'GS', 'MP', 'FG', 'FGA', 'FG%', '3P',
        'DRB', 'TRB', 'AST', 'STL', 'BLK', 'TOV', 'PF', 'PTS', 
        'Year', 'W', 'L', 'W/L%', 'GB', 'PS/G', 'PA/G', 'SRS']
 
-# defines training and test data for machine learning
+# defines training and test data for machine learning s
 train = stats[stats["Year"] < 2023]
 test = stats[stats["Year"] == 2023]
 

@@ -29,7 +29,7 @@ for year in years:
     curr_mvp = pd.read_html(str(mvp_table))[0]
     # creates a column year
     curr_mvp["Year"] = year
-    # appends all dataframes into a list
+    # appends all dataframes into a list s
     dfs.append(curr_mvp)
 
 # puts it all into one dataframe
