@@ -19,7 +19,7 @@ for year in years:
 
 dfs = []
 for year in years:
-    with open("mvp/{}.html".format(year)) as f:
+    with open("mvp_pages/{}.html".format(year)) as f:
         page = f.read()
     soup = BeautifulSoup(page, "html.parser")
     # removes unnecessary header from table
@@ -80,7 +80,7 @@ dfs = []
 
 # parses the team pages into a data frame
 for year in years:
-    with open("teams/{}.html".format(year)) as f:
+    with open("teams_pages/{}.html".format(year)) as f:
         page = f.read()
     
     soup = BeautifulSoup(page, 'html.parser')
