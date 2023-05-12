@@ -2,7 +2,6 @@ import pandas as pd
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.preprocessing import StandardScaler
 
 stats = pd.read_csv("player_mvp_combined.csv")
 
@@ -79,9 +78,6 @@ def add_ranks(combination):
 
 years = list(range(1990, 2024))
 
-
-sc = StandardScaler()
-
 # backtesting - makes predictions for most of our errors
 def backtest(stats, model, year, predictors):
     aps = []
@@ -92,10 +88,7 @@ def backtest(stats, model, year, predictors):
         # tests the year with the training data
         test = stats[stats["Year"] == year]
         # fitting the model to make predictions
-        sc.fit(train[predictors], train["Share"])
-
-        train[predictors] = sc.transform(train[predictors])
-        test[predictors] = sc.transform(test[predictors])
+        model.fit(train[predictors], train["Share"])
         # makes predictions with model and converts to df
         predictions = model.predict(test[predictors])
         predictions = pd.DataFrame(predictions, columns = ["predictions"], index = test.index)
@@ -121,7 +114,5 @@ stats["NTm"] = stats["Tm"].astype("category").cat.codes
 # creates a random forest regressor
 rf = RandomForestRegressor(n_estimators = 50, random_state = 1,min_samples_split=5)
 
-mean_ap, aps, all_predictions = backtest(stats, reg, years[30:], predictors)
-
-
+mean_ap, aps, all_predictions = backtest(stats, rf, years[30:], predictors + ["NPos", "NTeam"])
 print(mean_ap)
