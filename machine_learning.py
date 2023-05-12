@@ -108,11 +108,14 @@ stats[["PTS_R", "AST_R", "STL_R", "BLK_R", "3P_R"]] = stat_ratios[["PTS", "AST",
 # adds columns to predictors
 predictors += ["PTS_R", "AST_R", "STL_R", "BLK_R", "3P_R"]
 
-stats["NPos"] = stats["Pos"].astype("category").cat.codes
-stats["NTm"] = stats["Tm"].astype("category").cat.codes
-
 # creates a random forest regressor
 rf = RandomForestRegressor(n_estimators = 50, random_state = 1,min_samples_split=5)
 
-mean_ap, aps, all_predictions = backtest(stats, rf, years[30:], predictors + ["NPos", "NTeam"])
+mean_ap, aps, all_predictions = backtest(stats, rf, years[30:], predictors)
+
+# predicts the top 10 nba mvp candidates for next year and prints them out
+prediction = combination.sort_values("Predicted_Rk", ascending=True).head(10)
+print(prediction)
+
+# prints correlation between actual and predicted standings
 print(mean_ap)
