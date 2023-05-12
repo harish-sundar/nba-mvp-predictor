@@ -70,4 +70,4 @@ print(total["3P%"].head(10))
 # writes cleaned, combined data to a csv file
 total.to_csv("player_mvp_combined.csv", index=False)
 
-# shows factors most necessary for a nj
+# shows factors most necessary for a 
